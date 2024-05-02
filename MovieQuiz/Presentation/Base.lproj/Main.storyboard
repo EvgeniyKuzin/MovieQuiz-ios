@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,66 +15,109 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MovieQuizViewController" customModule="MovieQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0s-ER-DGQ" userLabel="Yes Button">
-                                <rect key="frame" x="217" y="802" width="177" height="60"/>
-                                <color key="backgroundColor" name="YP White"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Да">
-                                    <color key="titleColor" name="YP Black"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GE4-NF-2Mf">
-                                <rect key="frame" x="20" y="58" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHH-C0-mW8" userLabel="No Button">
-                                <rect key="frame" x="20" y="802" width="177" height="60"/>
-                                <color key="backgroundColor" name="YP White"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Y0-GC-vwd">
+                                <rect key="frame" x="20" y="69" width="353" height="749"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="asB-bZ-wbp">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Вопрос:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GE4-NF-2Mf" userLabel="Question Title Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="309.66666666666669" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" name="YP White"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7o-A7-Mh9" userLabel="Index Label">
+                                                <rect key="frame" x="317.66666666666669" y="0.0" width="35.333333333333314" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" name="YP White"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-OZ-MAd" userLabel="Preview Image">
+                                        <rect key="frame" x="0.0" y="44" width="353" height="529.66666666666663"/>
+                                        <color key="backgroundColor" name="YP White"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="cbf-OZ-MAd" secondAttribute="height" multiplier="2:3" id="3eq-7b-9m2"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xr-n0-I8a" userLabel="Question Label">
+                                        <rect key="frame" x="0.0" y="593.66666666666663" width="353" height="75.333333333333371"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-Gs-hit">
+                                        <rect key="frame" x="0.0" y="689" width="353" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHH-C0-mW8" userLabel="No Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="60"/>
+                                                <color key="backgroundColor" name="YP White"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="7yw-ue-aSq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Нет">
+                                                    <color key="titleColor" name="YP Black"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0s-ER-DGQ" userLabel="Yes Button">
+                                                <rect key="frame" x="186.66666666666663" y="0.0" width="166.33333333333337" height="60"/>
+                                                <color key="backgroundColor" name="YP White"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Да">
+                                                    <color key="titleColor" name="YP Black"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="WHH-C0-mW8" firstAttribute="width" secondItem="k0s-ER-DGQ" secondAttribute="width" id="wMU-Uh-s4k"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Gd4-Vw-EEr"/>
+                                    <constraint firstItem="asB-bZ-wbp" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="83z-ca-dtv"/>
+                                    <constraint firstItem="1xr-n0-I8a" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="85F-MH-tqs"/>
+                                    <constraint firstAttribute="bottom" secondItem="O7j-Gs-hit" secondAttribute="bottom" id="9li-Vc-bfi"/>
+                                    <constraint firstAttribute="trailing" secondItem="asB-bZ-wbp" secondAttribute="trailing" id="N43-l9-nbE"/>
+                                    <constraint firstItem="O7j-Gs-hit" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="RgH-Ne-bPQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="cbf-OZ-MAd" secondAttribute="trailing" id="SUo-ou-cgf"/>
+                                    <constraint firstItem="cbf-OZ-MAd" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="pdR-Wo-KdA"/>
+                                    <constraint firstItem="asB-bZ-wbp" firstAttribute="top" secondItem="2Y0-GC-vwd" secondAttribute="top" id="pno-O4-2Tn"/>
+                                    <constraint firstAttribute="trailing" secondItem="O7j-Gs-hit" secondAttribute="trailing" id="uxJ-MU-EdC"/>
+                                    <constraint firstAttribute="trailing" secondItem="1xr-n0-I8a" secondAttribute="trailing" id="w8L-HU-V95"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Нет">
-                                    <color key="titleColor" name="YP Black"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GE4-NF-2Mf" secondAttribute="trailing" constant="20" id="3az-l9-ATq"/>
-                            <constraint firstItem="GE4-NF-2Mf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3oX-V5-0Ig"/>
-                            <constraint firstItem="WHH-C0-mW8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="979-vb-3Jj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k0s-ER-DGQ" secondAttribute="trailing" constant="20" id="CMN-h6-LjE"/>
-                            <constraint firstItem="WHH-C0-mW8" firstAttribute="width" secondItem="k0s-ER-DGQ" secondAttribute="width" id="Qnt-5e-Ljj"/>
-                            <constraint firstItem="k0s-ER-DGQ" firstAttribute="leading" secondItem="WHH-C0-mW8" secondAttribute="trailing" constant="20" id="Vq9-6M-brJ"/>
-                            <constraint firstItem="GE4-NF-2Mf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="ist-YO-To9"/>
-                            <constraint firstItem="WHH-C0-mW8" firstAttribute="height" secondItem="k0s-ER-DGQ" secondAttribute="height" id="k0W-M0-d6H"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WHH-C0-mW8" secondAttribute="bottom" id="xar-6e-RM8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="k0s-ER-DGQ" secondAttribute="bottom" id="xcm-J1-6g0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Y0-GC-vwd" secondAttribute="trailing" constant="20" id="7CF-JX-4i3"/>
+                            <constraint firstItem="2Y0-GC-vwd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Cih-Vq-p5D"/>
+                            <constraint firstItem="2Y0-GC-vwd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="YCR-ED-7cK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2Y0-GC-vwd" secondAttribute="bottom" id="iGn-0A-vOP"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55.072463768115945" y="55.580357142857139"/>
+            <point key="canvasLocation" x="-55.725190839694655" y="54.929577464788736"/>
         </scene>
     </scenes>
     <resources>
