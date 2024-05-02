@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Y0-GC-vwd">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Y0-GC-vwd">
                                 <rect key="frame" x="20" y="69" width="353" height="749"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="asB-bZ-wbp">
@@ -45,21 +45,18 @@
                                             <constraint firstAttribute="width" secondItem="cbf-OZ-MAd" secondAttribute="height" multiplier="2:3" id="3eq-7b-9m2"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xr-n0-I8a" userLabel="Question Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xr-n0-I8a" userLabel="Question Label">
                                         <rect key="frame" x="0.0" y="593.66666666666663" width="353" height="75.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="YP White"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-Gs-hit">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-Gs-hit">
                                         <rect key="frame" x="0.0" y="689" width="353" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHH-C0-mW8" userLabel="No Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="60"/>
                                                 <color key="backgroundColor" name="YP White"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="7yw-ue-aSq"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Нет">
@@ -87,22 +84,10 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="WHH-C0-mW8" firstAttribute="width" secondItem="k0s-ER-DGQ" secondAttribute="width" id="wMU-Uh-s4k"/>
+                                            <constraint firstAttribute="height" constant="60" id="EPZ-1Y-4kO"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="asB-bZ-wbp" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="83z-ca-dtv"/>
-                                    <constraint firstItem="1xr-n0-I8a" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="85F-MH-tqs"/>
-                                    <constraint firstAttribute="bottom" secondItem="O7j-Gs-hit" secondAttribute="bottom" id="9li-Vc-bfi"/>
-                                    <constraint firstAttribute="trailing" secondItem="asB-bZ-wbp" secondAttribute="trailing" id="N43-l9-nbE"/>
-                                    <constraint firstItem="O7j-Gs-hit" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="RgH-Ne-bPQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="cbf-OZ-MAd" secondAttribute="trailing" id="SUo-ou-cgf"/>
-                                    <constraint firstItem="cbf-OZ-MAd" firstAttribute="leading" secondItem="2Y0-GC-vwd" secondAttribute="leading" id="pdR-Wo-KdA"/>
-                                    <constraint firstItem="asB-bZ-wbp" firstAttribute="top" secondItem="2Y0-GC-vwd" secondAttribute="top" id="pno-O4-2Tn"/>
-                                    <constraint firstAttribute="trailing" secondItem="O7j-Gs-hit" secondAttribute="trailing" id="uxJ-MU-EdC"/>
-                                    <constraint firstAttribute="trailing" secondItem="1xr-n0-I8a" secondAttribute="trailing" id="w8L-HU-V95"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
