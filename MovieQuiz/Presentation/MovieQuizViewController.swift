@@ -5,7 +5,7 @@ final class MovieQuizViewController: UIViewController {
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
     private let bigFont = UIFont(name: "YSDisplay-Medium", size: 23)
-    private let mediumFont = UIFont(name: "YSDisplay-Medium", size: 20)
+    private let mediumFont = UIFont(name: "YSDisplay-Bold", size: 20)
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
@@ -96,19 +96,19 @@ final class MovieQuizViewController: UIViewController {
     }
 }
 
-struct QuizQuestion {
+private struct QuizQuestion {
     let image: String
     let text: String
     let correctAnswer: Bool
 }
 
-struct QuizStepViewModel {
+private struct QuizStepViewModel {
     let image: UIImage
     let question: String
     let questionNumber: String
 }
 
-struct QuizResultsViewModel {
+private struct QuizResultsViewModel {
     let title: String
     let text: String
     let buttonText: String
