@@ -37,7 +37,7 @@ final class MovieQuizViewController: UIViewController {
         counterLabel.text = step.questionNumber
         imageView.image = step.image
         textLabel.text = step.question
-        imageView.layer.borderColor = CGColor(gray: 0, alpha: 0)
+        imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
         noButton.isEnabled = true
         yesButton.isEnabled = true
     }
@@ -46,7 +46,7 @@ final class MovieQuizViewController: UIViewController {
         if isCorrect {
             correctAnswers += 1
         }
-        imageView.layer.borderColor = CGColor(gray: 0, alpha: 1)
+        imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 1)
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.cornerRadius = 20
@@ -63,7 +63,7 @@ final class MovieQuizViewController: UIViewController {
     
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questions.count - 1 {
-            imageView.layer.borderColor = CGColor(gray: 0, alpha: 1)
+            imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
             let text = "Ваш результат: \(correctAnswers)/10"
             let viewModel = QuizResultsViewModel(
                 title: "Этот раунд закончен",
@@ -87,7 +87,6 @@ final class MovieQuizViewController: UIViewController {
         let action = UIAlertAction(title: result.buttonText, style: .default) { _ in
             self.currentQuestionIndex = 0
             self.show(quiz: self.convert(model: questions[self.currentQuestionIndex]))
-            self.imageView.layer.borderColor = UIColor.ypBackground.cgColor
         }
         
         alert.addAction(action)
