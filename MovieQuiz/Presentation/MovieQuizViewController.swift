@@ -4,8 +4,8 @@ final class MovieQuizViewController: UIViewController {
     
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
-    private let bigFont = UIFont(name: "YSDisplay-Medium", size: 23)
-    private let mediumFont = UIFont(name: "YSDisplay-Bold", size: 20)
+    private let bigFont = UIFont(name: "YSDisplay-Bold", size: 23)
+    private let mediumFont = UIFont(name: "YSDisplay-Medium", size: 20)
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
