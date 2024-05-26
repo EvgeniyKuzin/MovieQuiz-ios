@@ -65,14 +65,6 @@ final class MovieQuizViewController: UIViewController {
         return questionStep
     }
     
-    private func show(quiz step: QuizStepViewModel) {
-        counterLabel.text = step.questionNumber
-        imageView.image = step.image
-        textLabel.text = step.question
-        imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
-        noButton.isEnabled = true
-        yesButton.isEnabled = true
-    }
     
     private func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
@@ -116,7 +108,16 @@ final class MovieQuizViewController: UIViewController {
         }
     }
     
-    private func show(quiz result: QuizResultsViewModel){
+    private func show(quiz step: QuizStepViewModel) {
+        counterLabel.text = step.questionNumber
+        imageView.image = step.image
+        textLabel.text = step.question
+        imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
+        noButton.isEnabled = true
+        yesButton.isEnabled = true
+    }
+    
+    private func show(quiz result: QuizResultsViewModel) {
         let alert = UIAlertController(
             title: result.title,
             message: result.text,
