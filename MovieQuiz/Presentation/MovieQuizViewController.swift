@@ -1,6 +1,6 @@
 import UIKit
 
-final class MovieQuizViewController: UIViewController {
+final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     // MARK: IB Outlets
     @IBOutlet private var imageView: UIImageView!
@@ -15,28 +15,24 @@ final class MovieQuizViewController: UIViewController {
     private let bigFont = UIFont(name: "YSDisplay-Bold", size: 23)
     private let mediumFont = UIFont(name: "YSDisplay-Medium", size: 20)
     private var currentQuestionIndex = 0
-    
-    // добавлены в Спринт 5/20: 5 → Тема 2/4: Ответственность → Урок 5/9
     private let questionsAmount: Int = 10
-    private var questionFactory: QuestionFactory = QuestionFactory()
+    private var questionFactory: QuestionFactoryProtocol = QuestionFactory()
     private var currentQuestion: QuizQuestion?
     
     // MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let questionFactory = QuestionFactory()
+        questionFactory.setup(delegate: self)
+        self.questionFactory = questionFactory
+                
         textLabel.font = bigFont
         counterLabel.font = mediumFont
         noButton.titleLabel?.font = mediumFont
         yesButton.titleLabel?.font = mediumFont
         staticTopLabel.font = mediumFont
-        
-        if let nextQuestion = questionFactory.requestNextQuestion() {
-            currentQuestion = nextQuestion
-            let viewModel = convert(model: nextQuestion)
-
-            show(quiz: viewModel)
-        } 
+        questionFactory.requestNextQuestion()
     }
     
     // MARK: IB Actions
@@ -54,6 +50,20 @@ final class MovieQuizViewController: UIViewController {
         }
         let givenAnswer = false
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+    }
+    
+    // MARK: Public Methods
+    func didReceiveNextQuestion(question: QuizQuestion?) {
+        guard let question = question else {
+            return
+        }
+
+        currentQuestion = question
+        let viewModel = convert(model: question)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.show(quiz: viewModel)
+        }
     }
     
     // MARK: Private Methods
@@ -99,12 +109,7 @@ final class MovieQuizViewController: UIViewController {
             correctAnswers = 0
         } else {
             currentQuestionIndex += 1
-            if let nextQuestion = questionFactory.requestNextQuestion() {
-                currentQuestion = nextQuestion
-                let viewModel = convert(model: nextQuestion)
-
-                show(quiz: viewModel)
-            }
+            questionFactory.requestNextQuestion()
         }
     }
     
@@ -129,13 +134,7 @@ final class MovieQuizViewController: UIViewController {
             
             self.currentQuestionIndex = 0
             self.correctAnswers = 0
-            
-            if let firstQuestion = self.questionFactory.requestNextQuestion() {
-                self.currentQuestion = firstQuestion
-                let viewModel = self.convert(model: firstQuestion)
-
-                self.show(quiz: viewModel)
-            }
+            questionFactory.requestNextQuestion()
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
