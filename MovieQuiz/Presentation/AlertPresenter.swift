@@ -7,8 +7,9 @@
 
 import UIKit
 
-final class AlertPresenter: AlertPresenterProtocol {
-    weak var alertController: UIViewController?
+final class AlertPresenter: MovieQuizViewControllerDelelegate {
+
+    weak var alertController: AlertPresenterProtocol?
 
     func show(alertModel: AlertModel) {
         let alert = UIAlertController(title: alertModel.title, message: alertModel.message, preferredStyle: .alert)

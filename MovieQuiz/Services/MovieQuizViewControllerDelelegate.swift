@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MovieQuizViewControllerDelelegate {
-    func showResult(alertModel :AlertModel)
+    func show(alertModel :AlertModel)
 }

@@ -1,7 +1,7 @@
 import UIKit
 
-final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate,  {
-    
+final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, AlertPresenterProtocol {
+
     // MARK: IB Outlets
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
@@ -18,8 +18,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol = QuestionFactory()
     private var currentQuestion: QuizQuestion?
-    //DZ
-    private var alertDelegate: AlertPresenterProtocol
+    private var alertDelegate: MovieQuizViewControllerDelelegate?
     
     // MARK: - View Life Cycles
     override func viewDidLoad() {
@@ -102,7 +101,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         }
     }
     
-    private func showNextQuestionOrResults() {
+    func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
             imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
             let text = "Вы ответили на \(correctAnswers) из 10, попробуйте ещё раз!"
@@ -110,13 +109,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                 title: "Этот раунд закончен",
                 message: text,
                 buttonText: "Сыграть еще раз",
-                completion: {[weak self] in
-                    self?.currentQuestionIndex = 1
-                    self?.correctAnswers = 0
-                    self?.questionFactory.requestNextQuestion()
+                completion: {
+                    self.currentQuestionIndex = 1
+                    self.correctAnswers = 0
+                    self.questionFactory.requestNextQuestion()
                 })
             //alertDelegate.showResult(alertModel: alertModel)
-            alertDelegate.show(alertModel: alertModel)
+            alertDelegate?.show(alertModel: alertModel)
             correctAnswers = 0
         } else {
             currentQuestionIndex += 1
