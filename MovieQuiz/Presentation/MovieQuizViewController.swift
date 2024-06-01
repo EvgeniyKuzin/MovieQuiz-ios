@@ -19,6 +19,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private var questionFactory: QuestionFactoryProtocol = QuestionFactory()
     private var currentQuestion: QuizQuestion?
     private var alertDelegate: MovieQuizViewControllerDelelegate?
+    private let statisticService = StatisticService()
     
     // MARK: - View Life Cycles
     override func viewDidLoad() {
@@ -28,7 +29,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         questionFactory.setup(delegate: self)
         self.questionFactory = questionFactory
         
-        //DZ
         let alertDelegate = AlertPresenter()
         alertDelegate.alertController = self
         self.alertDelegate = alertDelegate
@@ -103,10 +103,20 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
+            statisticService.store(correct: correctAnswers, total: questionsAmount)
+            let bestGame = statisticService.bestGame
             imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
-            let text = "Вы ответили на \(correctAnswers) из 10, попробуйте ещё раз!"
+
+            let currentGameResultLine = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
+            let totalPlaysCountLine = "Количество сыгранных квизов: \(statisticService.gamesCount)"
+            let bestGameInfoLine = "Рекорд: \(bestGame.correct)/\(questionsAmount)"
+            + " (\(bestGame.date.dateTimeString))"
+            let averageAccuracyLine = "Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%"
+            
+            let text = [currentGameResultLine, totalPlaysCountLine, bestGameInfoLine, averageAccuracyLine].joined(separator: "\n")
+            
             let alertModel = AlertModel(
-                title: "Этот раунд закончен",
+                title: "Этот раунд окончен!",
                 message: text,
                 buttonText: "Сыграть еще раз",
                 completion: {
@@ -114,7 +124,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                     self.correctAnswers = 0
                     self.questionFactory.requestNextQuestion()
                 })
-            //alertDelegate.showResult(alertModel: alertModel)
             alertDelegate?.show(alertModel: alertModel)
             correctAnswers = 0
         } else {
