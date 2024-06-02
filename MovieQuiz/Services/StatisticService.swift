@@ -17,7 +17,7 @@ final class StatisticService: StatisticServiceProtocol {
     private let storage: UserDefaults = .standard
     
     var totalAccuracy: Double {
-        ((Double(correct) / Double(gamesCount)) * 10)
+        ((Double(total) / Double(gamesCount)) * 10)
     }
     
     var correct: Int {
@@ -64,8 +64,9 @@ final class StatisticService: StatisticServiceProtocol {
     }
     
     func store(correct count: Int, total amount: Int) {
-        correct += count
-        total += amount
+
+        correct = count
+        total += count
         gamesCount += 1
         
         let newRecord = GameResult(correct: correct, total: amount, date: Date())
