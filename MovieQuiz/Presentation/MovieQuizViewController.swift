@@ -91,7 +91,7 @@ final class MovieQuizViewController: UIViewController,
                 message: text,
                 buttonText: "Сыграть еще раз",
                 completion: {
-                    self.currentQuestionIndex = 1
+                    self.currentQuestionIndex = 0
                     self.correctAnswers = 0
                     self.questionFactory.requestNextQuestion()
                 })
