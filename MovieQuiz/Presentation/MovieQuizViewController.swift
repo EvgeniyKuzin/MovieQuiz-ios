@@ -1,7 +1,9 @@
 import UIKit
 
-final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, AlertPresenterProtocol {
-
+final class MovieQuizViewController: UIViewController,
+                                     QuestionFactoryDelegate,
+                                     AlertPresenterProtocol {
+    
     // MARK: IB Outlets
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
@@ -19,11 +21,12 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private var questionFactory: QuestionFactoryProtocol = QuestionFactory()
     private var currentQuestion: QuizQuestion?
     private var alertDelegate: MovieQuizViewControllerDelelegate?
-    private let statisticService = StatisticService()
+    private var statisticService: StatisticServiceProtocol?
     
     // MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        statisticService = StatisticService()
         
         let questionFactory = QuestionFactory()
         questionFactory.setup(delegate: self)
@@ -32,7 +35,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         let alertDelegate = AlertPresenter()
         alertDelegate.alertController = self
         self.alertDelegate = alertDelegate
-                
+        
         textLabel.font = bigFont
         counterLabel.font = mediumFont
         noButton.titleLabel?.font = mediumFont
@@ -63,7 +66,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         guard let question = question else {
             return
         }
-
+        
         currentQuestion = question
         let viewModel = convert(model: question)
         
@@ -72,49 +75,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         }
     }
     
-    // MARK: Private Methods
-    private func convert(model: QuizQuestion) -> QuizStepViewModel {
-        let questionStep = QuizStepViewModel(
-            image: UIImage(named: model.image) ?? UIImage(),
-            question: model.text,
-            questionNumber: "\(currentQuestionIndex + 1) / \(questionsAmount)")
-        return questionStep
-    }
-    
-    
-    private func showAnswerResult(isCorrect: Bool) {
-        if isCorrect {
-            correctAnswers += 1
-        }
-        imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 1)
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 8
-        imageView.layer.cornerRadius = 20
-        imageView.layer.borderColor = isCorrect
-        ? UIColor.ypGreen.cgColor
-        : UIColor.ypRed.cgColor
-        noButton.isEnabled = false
-        yesButton.isEnabled = false
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.showNextQuestionOrResults()
-        }
-    }
-    
     func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
-            statisticService.store(correct: correctAnswers, total: questionsAmount)
-            let bestGame = statisticService.bestGame
+            statisticService?.store(correct: correctAnswers, total: questionsAmount)
+            let bestGame = statisticService?.bestGame
             imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
-
-            let currentGameResultLine = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
-            let totalPlaysCountLine = "Количество сыгранных квизов: \(statisticService.gamesCount)"
-            let bestGameInfoLine = "Рекорд: \(bestGame.correct)/\(questionsAmount)"
-            + " (\(bestGame.date.dateTimeString))"
-            let averageAccuracyLine = "Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%"
-            
-            let text = [currentGameResultLine, totalPlaysCountLine, bestGameInfoLine, averageAccuracyLine].joined(separator: "\n")
-            
+            let text = """
+Ваш результат: \(correctAnswers)/\(questionsAmount)
+Количество сыгранных квизов: \(statisticService?.gamesCount ?? 0)
+Рекорд: \(bestGame?.correct ?? 0)/\(questionsAmount) (\(String(describing: bestGame?.date.dateTimeString ?? "")))
+Средняя точность: \(String(format: "%.2f", statisticService?.totalAccuracy ?? ""))%
+"""
             let alertModel = AlertModel(
                 title: "Этот раунд окончен!",
                 message: text,
@@ -132,13 +103,39 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         }
     }
     
+    // MARK: Private Methods
+    private func convert(model: QuizQuestion) -> QuizStepViewModel {
+        let questionStep = QuizStepViewModel(
+            image: UIImage(named: model.image) ?? UIImage(),
+            question: model.text,
+            questionNumber: "\(currentQuestionIndex + 1) / \(questionsAmount)")
+        return questionStep
+    }
+    
+    private func showAnswerResult(isCorrect: Bool) {
+        if isCorrect {
+            correctAnswers += 1
+        }
+        imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 1)
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 8
+        imageView.layer.cornerRadius = 20
+        imageView.layer.borderColor = isCorrect
+        ? UIColor.ypGreen.cgColor
+        : UIColor.ypRed.cgColor
+        changeStateButton(isEnabled: false)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.showNextQuestionOrResults()
+        }
+    }
+    
     private func show(quiz step: QuizStepViewModel) {
         counterLabel.text = step.questionNumber
         imageView.image = step.image
         textLabel.text = step.question
         imageView.layer.borderColor = CGColor(gray: 0.0, alpha: 0)
-        noButton.isEnabled = true
-        yesButton.isEnabled = true
+        changeStateButton(isEnabled: true)
     }
     
     func show(quiz result: QuizResultsViewModel) {
@@ -163,5 +160,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func changeStateButton(isEnabled: Bool) {
+        noButton.isEnabled = isEnabled
+        yesButton.isEnabled = isEnabled
     }
 }
