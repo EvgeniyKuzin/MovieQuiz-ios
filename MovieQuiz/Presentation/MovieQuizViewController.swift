@@ -27,6 +27,7 @@ final class MovieQuizViewController: UIViewController,
     // MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoadingIndicator()
         statisticService = StatisticService()
         
         let questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
@@ -37,9 +38,7 @@ final class MovieQuizViewController: UIViewController,
         alertDelegate.alertController = self
         self.alertDelegate = alertDelegate
         
-        showLoadingIndicator()
         questionFactory.loadData()
-        //questionFactory.requestNextQuestion()
         
         textLabel.font = bigFont
         counterLabel.font = mediumFont
@@ -141,7 +140,6 @@ final class MovieQuizViewController: UIViewController,
             self.questionFactory?.requestNextQuestion()
         }
         
-        //alertPresenter.show(in: self, model: model)
         alertDelegate?.show(alertModel: model)
     }
     
