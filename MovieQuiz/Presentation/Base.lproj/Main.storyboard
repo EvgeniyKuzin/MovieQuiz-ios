@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -100,17 +100,23 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9m8-8Q-H9X">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
+                            <constraint firstItem="9m8-8Q-H9X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2bg-0t-i8j"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Y0-GC-vwd" secondAttribute="trailing" constant="20" id="7CF-JX-4i3"/>
                             <constraint firstItem="2Y0-GC-vwd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Cih-Vq-p5D"/>
+                            <constraint firstItem="9m8-8Q-H9X" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Kni-8R-DkJ"/>
                             <constraint firstItem="2Y0-GC-vwd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="YCR-ED-7cK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2Y0-GC-vwd" secondAttribute="bottom" id="iGn-0A-vOP"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="9m8-8Q-H9X" id="hFX-rz-vZX"/>
                         <outlet property="counterLabel" destination="s7o-A7-Mh9" id="tf6-Ti-UYq"/>
                         <outlet property="imageView" destination="cbf-OZ-MAd" id="njc-te-SIB"/>
                         <outlet property="noButton" destination="WHH-C0-mW8" id="QIM-Qw-G2Y"/>
