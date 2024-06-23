@@ -10,7 +10,7 @@ import UIKit
 final class MovieQuizPresenter {
     
     // MARK: Private prorerties
-    private weak var viewController: MovieQuizViewController?
+    private weak var viewController: MovieQuizViewControllerProtocol?
     private var questionFactory: QuestionFactory?
     private let statisticService: StatisticService!
     
@@ -18,8 +18,8 @@ final class MovieQuizPresenter {
     private var currentQuestionIndex = 0
     private var currentQuestion: QuizQuestion?
     private var correctAnswers: Int = 0
-    
-    init(viewController: MovieQuizViewController) {
+
+    init(viewController: MovieQuizViewControllerProtocol) {
         self.viewController = viewController
         statisticService = StatisticService()
         
@@ -27,7 +27,8 @@ final class MovieQuizPresenter {
         questionFactory?.loadData()
         self.viewController?.showLoadingIndicator()
     }
-    
+
+            
     // MARK: - Public Methods
     func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(
